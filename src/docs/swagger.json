@@ -1,0 +1,24 @@
+{
+  "openapi": "3.0.0",
+  "info": { "title": "Personal Finance API", "version": "1.0.0" },
+  "paths": {
+    "/api/transactions": {
+      "get": { "summary": "List transactions", "responses": { "200": { "description": "OK" } } },
+      "post": { "summary": "Create transaction", "responses": { "201": { "description": "Created" }, "400": { "description": "Bad Request" } } }
+    },
+    "/api/transactions/{id}": {
+      "get": { "summary": "Get transaction", "parameters":[{"in":"path","name":"id","required":true,"schema":{"type":"string"}}], "responses": { "200": {"description":"OK"}, "404":{"description":"Not Found"} } },
+      "put": { "summary": "Update transaction", "parameters":[{"in":"path","name":"id","required":true,"schema":{"type":"string"}}], "responses": { "200": {"description":"OK"}, "400": {"description":"Bad Request"} } },
+      "delete": { "summary": "Delete transaction", "parameters":[{"in":"path","name":"id","required":true,"schema":{"type":"string"}}], "responses": { "204": {"description":"No Content"}, "404":{"description":"Not Found"} } }
+    },
+    "/api/accounts": {
+      "get": { "summary": "List accounts", "responses": { "200": { "description": "OK" } } },
+      "post": { "summary": "Create account", "responses": { "201": { "description": "Created" }, "400": { "description": "Bad Request" } } }
+    },
+    "/api/accounts/{id}": {
+      "get": { "summary": "Get account", "parameters":[{"in":"path","name":"id","required":true,"schema":{"type":"string"}}], "responses": { "200": {"description":"OK"}, "404":{"description":"Not Found"} } },
+      "put": { "summary": "Update account", "parameters":[{"in":"path","name":"id","required":true,"schema":{"type":"string"}}], "responses": { "200": {"description":"OK"}, "400": {"description":"Bad Request"} } },
+      "delete": { "summary": "Delete account", "parameters":[{"in":"path","name":"id","required":true,"schema":{"type":"string"}}], "responses": { "204": {"description":"No Content"}, "404":{"description":"Not Found"} } }
+    }
+  }
+}
