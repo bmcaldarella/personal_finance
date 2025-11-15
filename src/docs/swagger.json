@@ -1,24 +1,256 @@
 {
   "openapi": "3.0.0",
-  "info": { "title": "Personal Finance API", "version": "1.0.0" },
+  "info": {
+    "title": "Personal Finance API",
+    "version": "1.0.0"
+  },
   "paths": {
     "/api/transactions": {
-      "get": { "summary": "List transactions", "responses": { "200": { "description": "OK" } } },
-      "post": { "summary": "Create transaction", "responses": { "201": { "description": "Created" }, "400": { "description": "Bad Request" } } }
+      "get": {
+        "summary": "List transactions",
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      },
+      "post": {
+        "summary": "Create transaction",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Transaction"
+              },
+              "example": {
+                "type": "income",
+                "amount": 1800,
+                "category": "salary",
+                "description": "Pago mensual",
+                "date": "2025-11-01",
+                "paymentMethod": "transfer",
+                "accountId": null
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Created" },
+          "400": { "description": "Bad Request" }
+        }
+      }
     },
+
     "/api/transactions/{id}": {
-      "get": { "summary": "Get transaction", "parameters":[{"in":"path","name":"id","required":true,"schema":{"type":"string"}}], "responses": { "200": {"description":"OK"}, "404":{"description":"Not Found"} } },
-      "put": { "summary": "Update transaction", "parameters":[{"in":"path","name":"id","required":true,"schema":{"type":"string"}}], "responses": { "200": {"description":"OK"}, "400": {"description":"Bad Request"} } },
-      "delete": { "summary": "Delete transaction", "parameters":[{"in":"path","name":"id","required":true,"schema":{"type":"string"}}], "responses": { "204": {"description":"No Content"}, "404":{"description":"Not Found"} } }
+      "get": {
+        "summary": "Get transaction",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK" },
+          "404": { "description": "Not Found" }
+        }
+      },
+      "put": {
+        "summary": "Update transaction",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Transaction"
+              },
+              "example": {
+                "type": "expense",
+                "amount": 75.5,
+                "category": "food",
+                "description": "Cena con amigos",
+                "date": "2025-11-05",
+                "paymentMethod": "card",
+                "accountId": null
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" }
+        }
+      },
+      "delete": {
+        "summary": "Delete transaction",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "No Content" },
+          "404": { "description": "Not Found" }
+        }
+      }
     },
+
     "/api/accounts": {
-      "get": { "summary": "List accounts", "responses": { "200": { "description": "OK" } } },
-      "post": { "summary": "Create account", "responses": { "201": { "description": "Created" }, "400": { "description": "Bad Request" } } }
+      "get": {
+        "summary": "List accounts",
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      },
+      "post": {
+        "summary": "Create account",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Account"
+              },
+              "example": {
+                "name": "Main account",
+                "type": "checking",
+                "currency": "EUR",
+                "initialBalance": 500,
+                "description": "Cuenta principal"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Created" },
+          "400": { "description": "Bad Request" }
+        }
+      }
     },
+
     "/api/accounts/{id}": {
-      "get": { "summary": "Get account", "parameters":[{"in":"path","name":"id","required":true,"schema":{"type":"string"}}], "responses": { "200": {"description":"OK"}, "404":{"description":"Not Found"} } },
-      "put": { "summary": "Update account", "parameters":[{"in":"path","name":"id","required":true,"schema":{"type":"string"}}], "responses": { "200": {"description":"OK"}, "400": {"description":"Bad Request"} } },
-      "delete": { "summary": "Delete account", "parameters":[{"in":"path","name":"id","required":true,"schema":{"type":"string"}}], "responses": { "204": {"description":"No Content"}, "404":{"description":"Not Found"} } }
+      "get": {
+        "summary": "Get account",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK" },
+          "404": { "description": "Not Found" }
+        }
+      },
+      "put": {
+        "summary": "Update account",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Account"
+              },
+              "example": {
+                "name": "Updated account",
+                "type": "savings",
+                "currency": "EUR",
+                "initialBalance": 800,
+                "description": "Cuenta actualizada"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" }
+        }
+      },
+      "delete": {
+        "summary": "Delete account",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "No Content" },
+          "404": { "description": "Not Found" }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+      "Transaction": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["income", "expense", "saving", "bill"]
+          },
+          "amount": {
+            "type": "number"
+          },
+          "category": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "paymentMethod": {
+            "type": "string",
+            "enum": ["cash", "card", "transfer"]
+          },
+          "accountId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": ["type", "amount", "category", "date", "paymentMethod"]
+      },
+
+      "Account": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "currency": { "type": "string" },
+          "initialBalance": { "type": "number" },
+          "description": { "type": "string" }
+        },
+        "required": ["name", "type", "currency", "initialBalance"]
+      }
     }
   }
 }
