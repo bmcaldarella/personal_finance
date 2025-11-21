@@ -1,4 +1,5 @@
 const { z } = require('zod');
+
 const TransactionSchema = z.object({
   type: z.enum(['income', 'expense', 'saving', 'bill']),
   amount: z.number().positive(),
@@ -6,5 +7,7 @@ const TransactionSchema = z.object({
   description: z.string().optional(),
   date: z.coerce.date(),
   paymentMethod: z.enum(['cash', 'card', 'transfer']),
+  accountId: z.string().min(1).optional(), // 7mo campo
 });
+
 module.exports = { TransactionSchema };
